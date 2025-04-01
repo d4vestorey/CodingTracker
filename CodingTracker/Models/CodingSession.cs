@@ -24,5 +24,12 @@ namespace CodingTracker.Models
             EndTime = endTime;
         }
 
+        internal CodingSession(int id, DateTime startTime, DateTime endTime)
+        {
+            Id = id;
+            StartTime = startTime;
+            EndTime = endTime;
+        }
+
     }
 }

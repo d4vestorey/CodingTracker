@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "oWPwrtmHk5A=",
+  "dgSpecHash": "XFaW63ptZ7g=",
   "success": true,
   "projectFilePath": "/Users/davestorey/csharpacademy/CodingTracker/CodingTracker/CodingTracker.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,8 @@
     "/Users/davestorey/.nuget/packages/microsoft.extensions.configuration.abstractions/9.0.3/microsoft.extensions.configuration.abstractions.9.0.3.nupkg.sha512",
     "/Users/davestorey/.nuget/packages/microsoft.extensions.configuration.fileextensions/9.0.3/microsoft.extensions.configuration.fileextensions.9.0.3.nupkg.sha512",
     "/Users/davestorey/.nuget/packages/microsoft.extensions.configuration.json/9.0.3/microsoft.extensions.configuration.json.9.0.3.nupkg.sha512",
+    "/Users/davestorey/.nuget/packages/microsoft.extensions.dependencyinjection/9.0.3/microsoft.extensions.dependencyinjection.9.0.3.nupkg.sha512",
+    "/Users/davestorey/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.3/microsoft.extensions.dependencyinjection.abstractions.9.0.3.nupkg.sha512",
     "/Users/davestorey/.nuget/packages/microsoft.extensions.fileproviders.abstractions/9.0.3/microsoft.extensions.fileproviders.abstractions.9.0.3.nupkg.sha512",
     "/Users/davestorey/.nuget/packages/microsoft.extensions.fileproviders.physical/9.0.3/microsoft.extensions.fileproviders.physical.9.0.3.nupkg.sha512",
     "/Users/davestorey/.nuget/packages/microsoft.extensions.filesystemglobbing/9.0.3/microsoft.extensions.filesystemglobbing.9.0.3.nupkg.sha512",

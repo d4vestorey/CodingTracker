@@ -1,30 +1,29 @@
-using Microsoft.Extensions.Configuration;
+ using Microsoft.Extensions.Configuration;
 
 namespace CodingTracker
 {
+   
     public class ConfigService
     {
         private readonly IConfiguration _configuration;
 
-        public ConfigService()
+        // Inject IConfiguration via constructor
+        public ConfigService(IConfiguration configuration)
         {
-            _configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory()) // Ensures it reads from the correct path
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .Build();
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         public string GetConnectionString(string key)
         {
             return _configuration.GetConnectionString(key)
-            ?? throw new InvalidOperationException("Connection string is not configured.");
+                ?? throw new InvalidOperationException($"Connection string '{key}' is not configured.");
         }
 
         public string GetDbPath()
         {
-            return _configuration["DatabasePaths:LocalDatabase"] 
-            ?? throw new InvalidOperationException("Database path is not configured.");
+            return _configuration["DatabasePaths:LocalDatabase"]
+                ?? throw new InvalidOperationException("Database path is not configured.");
         }
-
     }
+
 }

@@ -52,6 +52,10 @@
               "target": "Package",
               "version": "[9.0.3, )"
             },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
             "Spectre.Console": {
               "target": "Package",
               "version": "[0.49.1, )"

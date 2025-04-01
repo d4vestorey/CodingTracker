@@ -48,3 +48,6 @@
 /Users/davestorey/csharpacademy/CodingTracker/CodingTracker/obj/Debug/net9.0/CodingTracker.pdb
 /Users/davestorey/csharpacademy/CodingTracker/CodingTracker/obj/Debug/net9.0/CodingTracker.genruntimeconfig.cache
 /Users/davestorey/csharpacademy/CodingTracker/CodingTracker/obj/Debug/net9.0/ref/CodingTracker.dll
+/Users/davestorey/csharpacademy/CodingTracker/CodingTracker/bin/Debug/net9.0/Microsoft.Extensions.DependencyInjection.dll
+/Users/davestorey/csharpacademy/CodingTracker/CodingTracker/bin/Debug/net9.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/Users/davestorey/csharpacademy/CodingTracker/CodingTracker/obj/Debug/net9.0/CodingTracker.sourcelink.json
