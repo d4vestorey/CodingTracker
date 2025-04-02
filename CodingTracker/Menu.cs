@@ -1,6 +1,7 @@
 using Spectre.Console;
 using CodingTracker.Repository;
 using CodingTracker.Models;
+using System.Collections;
 
 namespace CodingTracker
 {
@@ -36,6 +37,12 @@ namespace CodingTracker
                     case MenuOptions.MenuOption.ViewSessions:
                         ViewSessions();
                         break;
+                    case MenuOptions.MenuOption.EditSession:
+                        ViewSessions();
+                        break;
+                    case MenuOptions.MenuOption.DeleteSession:
+                        ViewSessions();
+                        break;
                     case MenuOptions.MenuOption.Exit:
                         ExitApplication();
                         break;
@@ -57,6 +64,7 @@ namespace CodingTracker
         internal void ViewSessions()
         {
             var sessions = _repository.GetSessions();
+
             if (sessions.Count == 0)
             {
                 AnsiConsole.MarkupLine("[bold red]No coding sessions found.[/]");
@@ -80,6 +88,53 @@ namespace CodingTracker
 
         internal void CreateSession()
         {
+
+            var createSessionsSelection = AnsiConsole.Prompt(
+                      new SelectionPrompt<MenuOptions.CreateSessionOption>()
+                      .AddChoices(Enum.GetValues<MenuOptions.CreateSessionOption>())
+                      );
+
+            switch (createSessionsSelection)
+            {
+                case MenuOptions.CreateSessionOption.Automatic:
+                    StartAutomaticSession();
+                    break;
+                case MenuOptions.CreateSessionOption.Manual:
+                    StartManualSession();
+                    break;
+                case MenuOptions.CreateSessionOption.Return:
+                    return;
+                default:
+                    AnsiConsole.MarkupLine("[red]Invalid choice. Please try again.[/]");
+                    break;
+            }
+
+
+        }
+
+        internal void DeleteSession()
+        {
+            var sessions = _repository.GetSessions();
+
+            if (sessions.Count == 0)
+            {
+                AnsiConsole.MarkupLine("[bold red]No coding sessions found.[/]");
+                return;
+            }
+
+            var sessionToDelete = AnsiConsole.Prompt(
+            new SelectionPrompt<CodingSession>()
+            .Title("What coding session do you want to delete?")
+            .UseConverter(p => $"{p.Id} || {p.StartTime} || {p.EndTime} || {p.Duration}")
+            .AddChoices(sessions)
+            );
+
+            _repository.DeleteSession(sessionToDelete.Id);
+            AnsiConsole.MarkupLine($"[bold red]Session {sessionToDelete.Id} deleted successfully![/]");
+        }
+
+        internal void StartAutomaticSession()
+        {
             var startTime = DateTime.Now;
             AnsiConsole.MarkupLine($"[green]Session started at: {startTime}[/]");
             Console.WriteLine("Press any key to end the session...");
@@ -87,6 +142,38 @@ namespace CodingTracker
             var endTime = DateTime.Now;
             AnsiConsole.MarkupLine($"[red]Session ended at: {endTime}[/]");
             var session = new CodingSession(startTime, endTime);
+            _repository.AddSession(session);
+            AnsiConsole.MarkupLine("[bold green]Session saved successfully![/]");
+            Console.WriteLine("Press any key to return to the menu...");
+            Console.ReadLine();
+        }
+
+
+        internal void StartManualSession()
+        {
+            var startTime = AnsiConsole.Prompt(
+                new TextPrompt<string>("Enter the start time (yyyy-MM-dd HH:mm:ss):")
+                .PromptStyle("green")
+                .Validate(Validation.DateTimeValidate));
+
+            DateTime parsedStartTime = DateTime.ParseExact(startTime, "yyyy-MM-dd HH:mm:ss",
+            System.Globalization.CultureInfo.InvariantCulture);
+
+            AnsiConsole.MarkupLine($"[green]You entered a valid datetime: {parsedStartTime}[/]");
+
+
+            var endTime = AnsiConsole.Prompt(
+                new TextPrompt<string>("Enter the end time (yyyy-MM-dd HH:mm:ss):")
+                .PromptStyle("red")
+                .Validate(Validation.DateTimeValidate));
+
+            DateTime parsedEndTime = DateTime.ParseExact(endTime, "yyyy-MM-dd HH:mm:ss",
+            System.Globalization.CultureInfo.InvariantCulture);
+            AnsiConsole.MarkupLine($"[red]You entered a valid datetime: {parsedEndTime}[/]");
+
+
+
+            var session = new CodingSession(parsedStartTime, parsedEndTime);
             _repository.AddSession(session);
             AnsiConsole.MarkupLine("[bold green]Session saved successfully![/]");
         }

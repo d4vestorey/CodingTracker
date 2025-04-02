@@ -6,7 +6,16 @@ namespace CodingTracker
         {
             StartNewSession,
             ViewSessions,
+            EditSession,
+            DeleteSession,
             Exit
+        }
+
+        internal enum CreateSessionOption
+        {
+            Automatic,
+            Manual,
+            Return
         }
     }
 }

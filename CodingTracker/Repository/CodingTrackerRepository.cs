@@ -54,6 +54,20 @@ namespace CodingTracker.Repository
             }
         }
 
+        internal void DeleteSession(int id)
+        {
+            using(var connection = new SqliteConnection(_configService.GetConnectionString("DefaultConnection")))
+            {
+                connection.Open();
+                string query = "DELETE FROM CodingTracker WHERE Id = @id";
+                using (var command = new SqliteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", id); 
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
 
         internal void InitialiseDatabase()
         {
